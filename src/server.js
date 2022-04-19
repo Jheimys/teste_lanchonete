@@ -10,7 +10,9 @@ const app = express()
 
 
 //habilita para receberdados via post
-app.use(express.urlencoded({extended:true}))
+//app.use(express.urlencoded({extended:true}))
+
+app.use(express.json())
 
 app.use('/api', routes)
 
