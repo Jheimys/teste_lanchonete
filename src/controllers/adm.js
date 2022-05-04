@@ -26,8 +26,16 @@ async function post(req, res){
         return
     }
 
-   
-    adm.save()
+
+    const passwordCrypto = await crypto(password)
+    
+    const register = new AdmModel({
+        login,
+        password: passwordCrypto,
+    })
+
+
+    register.save()
     res.send({
         message: 'success'
     })
