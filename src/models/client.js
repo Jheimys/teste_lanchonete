@@ -1,10 +1,28 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-    name: String,
-    email: String,
-    telefone:Number,
-    endereco: String,
+    name:{
+      type:String,
+      required: true,  
+    },
+
+    email:{
+        type:String,
+        required: true,
+        unique: true 
+    },
+
+    telefone:{
+        type:Number,
+        required: true,  
+      },
+
+    endereco:{
+        type:String,
+        required: true,  
+      },
+
+    
 })
 
 const Model = mongoose.model('client', schema)

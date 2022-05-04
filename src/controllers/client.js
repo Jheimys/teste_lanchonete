@@ -1,5 +1,6 @@
 const ClientModel = require('../models/client')
 const mongoose = require('mongoose')
+const { find, findOne } = require('../models/client')
 
 async function get(req, res){
  
@@ -18,6 +19,15 @@ async function post(req, res){
 
     const {name, email, telefone, endereco,} = req.body
 
+    if (!name || !email || !telefone || !endereco) {
+        let fields = '';
+        if (!name) fields += 'nome'
+        if (!email) fields += (fields.length > 0 ? ', ' : '') + 'email'
+        if (!telefone) fields += (fields.length > 0 ? ', ' : '') + 'telefone'
+        if (!endereco) fields += (fields.length > 0 ? ', ' : '') + 'endereço'
+        return res.status(400).json({message:"Requisição mal formatada. Favor fornecer:" + fields});
+    }
+
     const client = new ClientModel({
         name,
         email,
@@ -25,12 +35,58 @@ async function post(req, res){
         endereco,
     })
 
-    client.save()
-    res.send({
-        message: 'success'
-    })
-
+    try {
+        await client.save();  
+        return res.status(201).send({
+            message: "success"
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({err})
     }
+
+    
+    // if(!name){
+    //     res.status(422).json({message:'O nome é obrigatório!'})
+    //     return
+    // }
+
+    // if(!email){
+    //     res.status(422).json({message:'O email é obrigatório!'})
+    //     return
+    // }
+
+    // if(!telefone){
+    //     res.status(422).json({message:'O telefone é obrigatório!'})
+    //     return
+    // }
+
+    // if(!endereco){
+    //     res.status(422).json({message:'O endereco é obrigatório!'})
+    //     return
+    // }
+    
+    //check if client exists
+
+    // const clientExists = await ClientModel.findOne({email: email})
+
+
+    // if(clientExists){
+    //     res.status(422).json({
+    //         message:'Por favor, digite outro email!' 
+    //     })
+        
+    //     return
+    // }
+   
+
+    // client.save()
+    // res.send({
+    //     message: 'success'
+    // })
+
+
+}
 
 //Atualizando com o método PUT
 async function put(req, res){
