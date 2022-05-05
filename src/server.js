@@ -5,6 +5,7 @@ const path = require('path')
 const routes = require('./routes/routes')
 const db = require('./database/db')
 
+
 db.connect()
 // createDefaultUser()
 async function createDefaultUser() {
@@ -41,6 +42,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
+
 
 app.use('/api', routes)
 
