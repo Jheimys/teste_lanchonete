@@ -6,6 +6,7 @@ const ProductsControllers = require('../controllers/products')
 const ClientControllers = require('../controllers/client')
 const PedidosControllers = require('../controllers/pedidos')
 const AdmControllers = require('../controllers/adm')
+const LoginControllers = require('../controllers/login')
 
 
 //Rotas de produtos
@@ -24,6 +25,13 @@ router.delete('/client/:id', ClientControllers.remove)
 router.get('/pedidos/:id?', PedidosControllers.get)
 
 //Rotas de adm
+router.get('/adm/:id?', AdmControllers.get)
 router.post('/adm', AdmControllers.post)
+
+
+//Rotas de adm login
+router.get('/login/:id?', LoginControllers.get)
+//router.post('/login', LoginControllers.post)
+router.post('/login/auth', LoginControllers.login)
 
 module.exports = router

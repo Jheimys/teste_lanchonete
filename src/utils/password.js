@@ -1,11 +1,13 @@
 
 const bcrypt = require('bcrypt')
+const SALT = 10
 
 async function crypto(pwd){
 
-    const salt = await bcrypt.genSalt()
+    const saltDefine = await bcrypt.genSalt(SALT)
+    console.log("salt ==>", saltDefine)
 
-    const password = await bcrypt.hash(pwd, salt)
+    const password = await bcrypt.hash(pwd, saltDefine)
 
     return password
 }

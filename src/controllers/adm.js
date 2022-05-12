@@ -2,8 +2,18 @@ const AdmModel = require('../models/adm')
 const mongoose = require('mongoose')
 const { find, findOne } = require('../models/adm')
 const {crypto} = require('../utils/password')
+const bcrypt = require('bcrypt');
 
 
+async function get(req, res){
+
+    const {id} = req.params
+
+    const obj = id ? {_id: id} : null
+
+    const adm = await AdmModel.find(obj)
+    res.send(adm)
+}
 
 //Recebendo dados via post
 async function post(req, res){
@@ -44,7 +54,25 @@ async function post(req, res){
 
 
 
-module.exports = {
 
+
+
+
+    // if (user) {
+    // } else {
+    // }
+    // const register = new AdmModel({
+        // login,
+        // password: passwordCrypto,
+    // })
+
+
+    // register.save()
+
+
+
+
+module.exports = {
+    get,
     post,
 }
