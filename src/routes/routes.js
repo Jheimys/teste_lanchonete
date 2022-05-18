@@ -23,6 +23,7 @@ router.delete('/client/:id', ClientControllers.remove)
 
 //Rotas de pedidos
 router.get('/pedidos/:id?', PedidosControllers.get)
+router.post('/pedidos', PedidosControllers.post )
 
 //Rotas de adm
 router.get('/adm/:id?', AdmControllers.get)
