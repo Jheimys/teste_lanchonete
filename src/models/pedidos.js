@@ -13,15 +13,20 @@ const StatusDoPedido = Object.freeze({
 
 const schema = new mongoose.Schema({
 
-    name: String,
-    // product: Array,
-    product: [{
-        qtd: Number,
-        product: String
-    }],
-    amount: Number,
-    data: Date,
-    status: String,
+    pedidios:[
+        {
+            produtoId:{type: Object, ref:'Pedidos' },
+            qtd: {type: Number, min: 0, default: 0},
+            produtoNome: { type: String },
+            produtoPreco: { type: Number },
+        }
+    ],
+
+    nome: { type: Object, ref: 'Clientes'},
+    nomeCliente: { type: String },
+    data: { type: Date },
+    status: { type: Number, enum: [0,1,2,3,4], default: 0},
+    preco: { type: Number }
 
 })
 
